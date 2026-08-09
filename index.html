@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SZAS — Intriga y Rebeldía</title>
+<meta name="description" content="SZAS — Streetwear colombiano. Intriga y rebeldía.">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="header">
+  <a class="logo" href="#">SZAS</a>
+  <nav>
+    <a href="#drop">DROP</a>
+    <a href="#tienda">TIENDA</a>
+    <a href="#tallas">TALLAS</a>
+  </nav>
+  <button class="cart-btn" onclick="openCart()">CARRITO <span id="cartCount">0</span></button>
+</header>
+
+<main>
+<section class="hero">
+  <div>
+    <p class="eyebrow">SZAS / COLOMBIA</p>
+    <h1>INTRIGA<br><span>Y REBELDÍA</span></h1>
+    <p class="hero-text">STREETWEAR PARA QUIENES NO BUSCAN ENCAJAR.</p>
+    <a class="btn light" href="#tienda">VER COLECCIÓN</a>
+  </div>
+</section>
+
+<section class="manifesto">
+  <p>NO SE TRATA DE SEGUIR TENDENCIAS.</p>
+  <h2>SE TRATA DE TENER<br>PERSONALIDAD.</h2>
+</section>
+
+<section class="section" id="drop">
+  <div class="section-head">
+    <div><span class="eyebrow">DROP ACTUAL</span><h2>LO MÁS RECIENTE</h2></div>
+    <a href="#tienda">VER TODO →</a>
+  </div>
+  <div id="featured" class="products"></div>
+</section>
+
+<section class="section shop" id="tienda">
+  <div class="section-head">
+    <div><span class="eyebrow">SZAS SHOP</span><h2>COLECCIÓN</h2></div>
+  </div>
+  <div class="filters">
+    <button class="filter active" data-cat="Todos">TODO</button>
+    <button class="filter" data-cat="Camisas">CAMISAS</button>
+    <button class="filter" data-cat="Conjuntos">CONJUNTOS</button>
+    <button class="filter" data-cat="Sacos">SACOS</button>
+  </div>
+  <div id="products" class="products"></div>
+</section>
+
+<section class="size-section" id="tallas">
+  <div>
+    <span class="eyebrow">ENCUENTRA TU TALLA</span>
+    <h2>GUÍA DE TALLAS</h2>
+    <p>Consulta las medidas antes de realizar tu pedido.</p>
+  </div>
+  <div class="size-table-wrap">
+    <table>
+      <thead><tr><th>TALLA</th><th>PECHO</th><th>LARGO</th></tr></thead>
+      <tbody>
+        <tr><td>S</td><td>—</td><td>—</td></tr>
+        <tr><td>M</td><td>—</td><td>—</td></tr>
+        <tr><td>L</td><td>—</td><td>—</td></tr>
+        <tr><td>XL</td><td>—</td><td>—</td></tr>
+        <tr><td>XXL</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p class="hint">Puedes cambiar estas medidas directamente en <b>script.js</b>.</p>
+  </div>
+</section>
+
+<section class="benefits">
+  <div><b>ENVÍOS</b><span>A toda Colombia</span></div>
+  <div><b>DROP LIMITADO</b><span>Unidades limitadas</span></div>
+  <div><b>COMPRA DIRECTA</b><span>Pedido por WhatsApp</span></div>
+</section>
+</main>
+
+<footer>
+  <div class="logo">SZAS</div>
+  <p>INTRIGA Y REBELDÍA · COLOMBIA</p>
+  <a href="https://wa.me/573224982212" target="_blank">WHATSAPP</a>
+</footer>
+
+<div id="overlay" class="overlay" onclick="closeCart()"></div>
+<aside id="cart" class="cart">
+  <div class="cart-head"><h2>TU CARRITO</h2><button onclick="closeCart()">×</button></div>
+  <div id="cartItems"></div>
+  <div class="cart-bottom">
+    <div><span>TOTAL</span><strong id="cartTotal">$0</strong></div>
+    <button class="btn dark full" onclick="checkout()">PEDIR POR WHATSAPP</button>
+  </div>
+</aside>
+
+<script src="script.js"></script>
+</body>
+</html>
