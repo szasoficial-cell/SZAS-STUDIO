@@ -1,0 +1,13 @@
+THIRD-PARTY / MODEL NOTES
+
+@huggingface/transformers — Apache-2.0
+https://www.npmjs.com/package/@huggingface/transformers
+
+xrds/isnet-general-onnx-int8 — MIT
+https://huggingface.co/xrds/isnet-general-onnx-int8
+
+onnx-community/swin2SR-realworld-sr-x4-64-bsrgan-psnr-ONNX — Apache-2.0
+https://huggingface.co/onnx-community/swin2SR-realworld-sr-x4-64-bsrgan-psnr-ONNX
+
+ImageTracerJS — MIT
+https://github.com/jankovicsandras/imagetracerjs
