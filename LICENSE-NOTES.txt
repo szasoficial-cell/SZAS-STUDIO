@@ -1,2 +1,0 @@
-SZAS STUDIO uses third-party browser libraries/models. Review their licenses before commercial deployment.
-See README.md for the specific components and license notes.
