@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>SZAS STUDIO — Image / Process / Print</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/imagetracerjs@1.2.6/imagetracer_v1.2.6.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><strong>SZAS</strong><small>STUDIO</small></a>
+  <div class="top-right"><span id="engineBadge" class="badge">LOCAL ENGINE</span><span id="aiStatus" class="ai-status"><i></i> AI READY</span></div>
+</header>
+
+<main class="shell">
+  <aside class="rail">
+    <div class="rail-head"><span>STUDIO</span><b>V2 / PRO</b></div>
+    <button class="nav active" data-jump="import"><span class="n">01</span><span>Importar</span></button>
+    <button class="nav" data-jump="ai"><span class="n">02</span><span>IA / Mejorar</span><em>AI</em></button>
+    <button class="nav" data-jump="remove"><span class="n">03</span><span>Quitar fondo</span><em>AI</em></button>
+    <button class="nav" data-jump="create"><span class="n">04</span><span>Crear</span></button>
+    <button class="nav" data-jump="dtf"><span class="n">05</span><span>DTF / Semitono</span></button>
+    <button class="nav" data-jump="print"><span class="n">06</span><span>Preparar impresión</span></button>
+    <button class="nav" data-jump="export"><span class="n">07</span><span>Exportar</span></button>
+    <div class="rail-bottom"><span>PRIVATE BY DEFAULT</span><b>NO UPLOAD</b></div>
+  </aside>
+
+  <section class="main">
+    <section class="hero" id="import">
+      <div><p class="eyebrow">SZAS / IMAGE LAB</p><h1>PREPARA.<br><em>TRANSFORMA.</em><br>IMPRIME.</h1><p class="lead">Un laboratorio de imagen para diseño, DTF y producción. Procesamiento local siempre que sea posible.</p></div>
+      <div class="hero-index">07<br><small>TOOLS</small></div>
+    </section>
+
+    <section class="workspace">
+      <aside class="tools">
+        <div class="tool-group" id="importTools">
+          <div class="section-label"><span>01</span> IMPORTAR</div>
+          <label id="dropzone" class="dropzone"><input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp"><b>＋</b><strong>ARRASTRA TU IMAGEN</strong><small>o selecciona un archivo</small><i>PNG / JPG / WEBP</i></label>
+        </div>
+
+        <div class="tool-group" id="ai">
+          <div class="section-label"><span>02</span> IA / MEJORAR</div>
+          <button class="tool ai" data-action="aiUpscale"><span>AMPLIAR 4×</span><em>AI</em></button>
+          <button class="tool" data-action="enhance"><span>MEJORAR DETALLE</span><em>PRO</em></button>
+          <button class="tool" data-action="denoise"><span>REDUCIR RUIDO</span></button>
+        </div>
+
+        <div class="tool-group" id="remove">
+          <div class="section-label"><span>03</span> FONDO</div>
+          <button class="tool ai" data-action="aiRemove"><span>QUITAR FONDO</span><em>AI</em></button>
+          <button class="tool" data-action="autocrop"><span>RECORTAR AL CONTENIDO</span></button>
+          <button class="tool" data-action="edgeClean"><span>LIMPIAR BORDES</span></button>
+        </div>
+
+        <div class="tool-group" id="create">
+          <div class="section-label"><span>04</span> CREAR</div>
+          <button class="tool accent" data-jump="dtf"><span>SEMITONO DTF</span><em>PRO</em></button>
+          <button class="tool" data-action="vectorize"><span>VECTORIZAR</span><em>SVG</em></button>
+          <button class="tool" data-action="channels"><span>DESCOMPONER CAPAS</span><em>RGB</em></button>
+          <button class="tool" data-action="cutout"><span>CALADO</span><em>ALPHA</em></button>
+        </div>
+
+        <div class="tool-group" id="adjust">
+          <div class="section-label"><span>05</span> AJUSTAR</div>
+          <div class="slider"><label>Brillo <output id="brightnessOut">0</output></label><input id="brightness" type="range" min="-100" max="100" value="0"></div>
+          <div class="slider"><label>Contraste <output id="contrastOut">0</output></label><input id="contrast" type="range" min="-100" max="100" value="0"></div>
+          <div class="slider"><label>Saturación <output id="saturationOut">0</output></label><input id="saturation" type="range" min="-100" max="100" value="0"></div>
+          <div class="slider"><label>Nitidez <output id="sharpnessOut">0</output></label><input id="sharpness" type="range" min="0" max="100" value="0"></div>
+          <button class="tool" data-action="grayscale"><span>ESCALA DE GRISES</span></button>
+          <button class="tool" data-action="threshold"><span>BLANCO / NEGRO</span></button>
+          <button class="tool" data-action="invert"><span>INVERTIR</span></button>
+          <button class="tool" data-action="reset"><span>RESTABLECER</span></button>
+        </div>
+
+        <div class="tool-group" id="export">
+          <div class="section-label"><span>06</span> EXPORTAR</div>
+          <button class="download" id="downloadPng">DESCARGAR PNG <b>↓</b></button>
+          <button class="download dark" id="downloadSvg">DESCARGAR SVG <b>↓</b></button>
+        </div>
+      </aside>
+
+      <section class="canvas-panel">
+        <div class="canvas-meta"><span id="fileName">SIN ARCHIVO</span><span id="imageInfo">—</span><span id="modeInfo">READY</span></div>
+        <div class="stage" id="stage">
+          <div class="checker" aria-hidden="true"></div>
+          <div class="empty" id="emptyState"><b>00</b><span>NO IMAGE / NO PROCESS</span><small>Sube una imagen para comenzar.</small></div>
+          <canvas id="canvas"></canvas>
+          <div class="compare-wrap" id="compareWrap"><canvas id="compareCanvas"></canvas></div>
+          <div class="busy" id="busy"><div class="spinner"></div><div><b id="busyTitle">PROCESANDO</b><small id="busyText">Local / GPU cuando está disponible</small></div></div>
+        </div>
+        <div class="canvas-controls">
+          <div class="zoom"><button id="zoomOut">−</button><output id="zoomLabel">100%</output><button id="zoomIn">＋</button></div>
+          <button id="undo">DESHACER</button><button id="redo">REHACER</button><button id="compare">ANTES / DESPUÉS</button><button id="fit">AJUSTAR</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="dtf" id="dtf">
+      <div class="section-intro"><p class="eyebrow">DTF / HALFTONE</p><h2>SEMITONO<br><em>CONTROL TOTAL.</em></h2><p>Convierte fotografía y arte en patrones de puntos preparados para impresión.</p>
+        <div class="presets"><button data-preset="dark">SZAS DARK</button><button data-preset="photo">SZAS PHOTO</button><button data-preset="high">HIGH CONTRAST</button><button data-preset="mono">MONO CLEAN</button></div>
+      </div>
+      <div class="half-controls">
+        <div class="slider"><label>Tamaño de punto <output id="dotOut">6</output></label><input id="dotSize" type="range" min="2" max="24" value="6"></div>
+        <div class="slider"><label>Contraste <output id="halfContrastOut">50</output></label><input id="halfContrast" type="range" min="0" max="100" value="50"></div>
+        <div class="slider"><label>Densidad <output id="densityOut">100</output></label><input id="density" type="range" min="10" max="100" value="100"></div>
+        <div class="slider"><label>Ángulo <output id="angleOut">45°</output></label><input id="angle" type="range" min="0" max="90" value="45"></div>
+        <label class="select-control">Patrón<select id="pattern"><option value="circle">CÍRCULO</option><option value="square">CUADRADO</option><option value="diamond">DIAMANTE</option></select></label>
+        <button class="switch" id="halfInvert">INVERTIR <b>NO</b></button>
+      </div>
+      <button class="apply" id="applyHalftone">APLICAR SEMITONO</button>
+    </section>
+
+    <section class="print" id="print">
+      <div class="section-intro"><p class="eyebrow">PRINT CHECK</p><h2>PREPARA EL<br><em>TAMAÑO REAL.</em></h2><p>Calcula resolución, tamaño físico y seguridad de impresión antes de exportar.</p></div>
+      <div class="print-fields">
+        <label>ANCHO (CM)<input id="printWidth" type="number" min="1" step=".1" value="30"></label>
+        <label>ALTO (CM)<input id="printHeight" type="number" min="1" step=".1" value="30"></label>
+        <label>DPI<select id="dpi"><option>300</option><option>250</option><option>200</option><option>150</option></select></label>
+        <label>PRESET<select id="dtfPreset"><option value="standard">DTF STANDARD</option><option value="photo">DTF PHOTO</option><option value="dark">DTF DARK GARMENT</option><option value="line">LINE ART</option></select></label>
+      </div>
+      <div class="print-result"><span>RESOLUCIÓN OBJETIVO</span><strong id="printResolution">3543 × 3543 PX</strong><small id="printStatus">—</small><div class="meter"><i id="printMeter"></i></div></div>
+    </section>
+
+    <footer><span>SZAS STUDIO © 2026</span><span>LOCAL / PRIVATE / DTF READY</span></footer>
+  </section>
+</main>
+
+<div class="modal" id="modal"><div class="modal-card"><button class="modal-close" id="modalClose">×</button><div id="modalContent"></div></div></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
